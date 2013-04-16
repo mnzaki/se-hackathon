@@ -5,10 +5,8 @@ class Task < ActiveRecord::Base
   has_many :hackers, :through => :claims
 
   attr_accessible :description, :minimum_global_level, :name, :points,
-                  :time_limit, :category_id, :user_story_id, :as => :admin
-
-  attr_accessible :description, :minimum_global_level, :name, :points,
-                  :time_limit, :category_id, :user_story_id
+                  :time_limit, :category_id, :user_story_id,
+                  :as => [:default, :admin]
 
 
   def claimable?
