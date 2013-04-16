@@ -6,10 +6,11 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :points
       t.integer :minimum_global_level
       t.integer :time_limit
-      t.references :Category
+      t.references :category
+      t.references :user_story
 
       t.timestamps
     end
-    add_index :tasks, :Category_id
+    add_index :tasks, :category_id
   end
 end
