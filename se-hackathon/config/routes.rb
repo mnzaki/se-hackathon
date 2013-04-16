@@ -1,4 +1,10 @@
 SeHackathon::Application.routes.draw do
+  resources :categories
+
+
+  resources :user_stories
+
+
   devise_for :hackers
 
   # The priority is based upon order of creation:
