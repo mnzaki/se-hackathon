@@ -1,0 +1,53 @@
+Developer -> Clone (locally hosted) -> Github + travis
+
+Check master on github every 5 seconds: http://developer.github.com/v3/git/refs/
+  need to pull master and update points depending on accepted pull reqs
+
+Checks in hooks:
+  test files exist
+  cannot push unless to branches for tasks assigned to you
+  no changes to tests directory
+
+On starting a new task:
+  Branch is created on the latest master with tests added
+  You see instrustions to checkout the branch, try the tests
+
+Test skeleton:
+  routes??
+  method specific tests?
+  views test?? Part of controller side task
+  factory girl + sequencing
+  make sure to check effects
+
+Gems:
+  devise - login
+  https://github.com/tute/merit -- probably this for gamification
+  https://github.com/scottburton11/Badgeable -- badges only :/
+
+Models:
+  User:
+    username == github username, ACTUALLY github login!
+    allow only the list of github usernames we have to login
+  User Story:
+    number, description
+  Task:
+    unique name, description, points, minimum global level, branch_name_for(user) (computable), points, time limit,
+    claimable? (computable), unlocked? (computable), last_claimed (computable), started?
+  Relations:
+    User Story contains tasks
+    Task has prerequisites
+    User claims task at time t
+
+Notification system:
+  notifications appear at the bottom right
+  should allow for javascript injection
+  polling every 5s
+
+Scoreboard:
+  scrolls to show different views each for a few seconds
+  fun display of points and leaders
+  animation on change of rankings?
+  animation on user aquiring a new badge
+  animation on change of global level
+
+
