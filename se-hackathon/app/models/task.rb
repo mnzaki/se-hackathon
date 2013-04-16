@@ -12,6 +12,10 @@ class Task < ActiveRecord::Base
 
 
   def claimable?
-
+    if claims = []
+      return true
+    else
+      claims.last.claimed_at < time_limit.minutes.ago
+    end
   end
 end
