@@ -2,7 +2,7 @@
 
 Task:
   fields:
-    default: name, description, points, minimum_global_level, time_limit, Category_id, user_story_id
-    form: name, description, points, minimum_global_level, time_limit, Category_id, user_story_id
+    default: name, description, points, minimum_global_level, time_limit, category, user_story
+    form: name, description, points, minimum_global_level, time_limit, category, user_story
   relationships: 
   application: Application

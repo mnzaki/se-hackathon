@@ -9,6 +9,8 @@ class Hacker < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :name, :email, :password, :password_confirmation,
                   :remember_me, :provider, :uid
+  attr_accessible :username, :name, :email, :password, :password_confirmation,
+                  :remember_me, :provider, :uid, :as => :admin
   # attr_accessible :title, :body
 
   def self.find_or_create_for_github_oauth(auth, signed_in_resource = nil)

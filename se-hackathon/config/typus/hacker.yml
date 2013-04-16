@@ -2,7 +2,7 @@
 
 Hacker:
   fields:
-    default: to_label
-    form: 
+    default: email, encrypted_password, reset_password_token, reset_password_sent_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, provider, uid, username, name
+    form: email, encrypted_password, reset_password_token, reset_password_sent_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, provider, uid, username, name
   relationships: 
   application: Application

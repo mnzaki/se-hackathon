@@ -2,7 +2,7 @@
 
 Category:
   fields:
-    default: to_label
-    form: 
+    default: name
+    form: name
   relationships: 
   application: Application
