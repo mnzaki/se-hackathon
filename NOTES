@@ -25,14 +25,17 @@ Gems:
   https://github.com/scottburton11/Badgeable -- badges only :/
 
 Models:
-  User:
+  Hacker:
+    name, points, level
     username == github username, ACTUALLY github login!
     allow only the list of github usernames we have to login
   User Story:
     number, description
   Task:
-    unique name, description, points, minimum global level, branch_name_for(user) (computable), points, time limit,
-    claimable? (computable), unlocked? (computable), last_claimed (computable), started?
+    unique name, description, points, minimum global level,
+    branch_name_for(user) (computable), points, time limit,
+    claimable? (computable), unlocked? (computable), last_claimed (computable),
+    started?, category
   Relations:
     User Story contains tasks
     Task has prerequisites
@@ -50,4 +53,15 @@ Scoreboard:
   animation on user aquiring a new badge
   animation on change of global level
 
+Competition Rules:
+  Each task belongs to a category.
+  Each task awards a certain number of points on completion.
+  A task is either unclaimed, claimed, or completed.
+  A hacker claims an unclaimed task.
+  A hacker can only claim a maximum of one task per category.
+  A claimed task cannot be claimed by another hacker unless it remains
+    incomplete for a certain interval of time (1 hour)
+  A task made available for reclaiming does not count towards the maximum tasks
+    per category limit for the first hacker, but DOES count for the second
+    hacker.
 
