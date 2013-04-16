@@ -29,4 +29,13 @@ class Hacker < ActiveRecord::Base
     hacker
   end
 
+  def claim(task)
+    if task.claimable?
+      tasks << task
+      return true
+    else
+      return false
+    end
+  end
+
 end
