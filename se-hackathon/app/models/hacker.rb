@@ -11,6 +11,8 @@ class Hacker < ActiveRecord::Base
                   :remember_me, :provider, :uid
   # attr_accessible :title, :body
 
+  has_and_belongs_to_many :hackathons
+
   def self.find_or_create_for_github_oauth(auth, signed_in_resource = nil)
     hacker = Hacker.where(:provider => auth.provider, :uid => auth.uid).first
     unless hacker
