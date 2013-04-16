@@ -16,3 +16,6 @@
 
 # Ignore the schema file
 /db/schema.rb
+
+# Ignore the github secrets file
+config/github.yml

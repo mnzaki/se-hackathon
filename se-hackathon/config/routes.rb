@@ -1,5 +1,5 @@
 SeHackathon::Application.routes.draw do
-  devise_for :hackers
+  devise_for :hackers, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
