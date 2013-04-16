@@ -1,4 +1,8 @@
 SeHackathon::Application.routes.draw do
+  resources :categories
+
+  resources :user_stories
+
   devise_for :hackers, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   # The priority is based upon order of creation:

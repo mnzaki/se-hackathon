@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @user_story.number %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @user_story.description %>
+</p>
+
+<p>Tasks:</p>
+<ol>
+  <% @user_story.tasks.each do |task| %>
+    <li><%= link_to task.name, task_path(task) %> (<%= task.category %>)</li>
+  <% end %>
+</ol>
+
+
+<%= link_to 'Edit', edit_user_story_path(@user_story) %> |
+<%= link_to 'Back', user_stories_path %>
