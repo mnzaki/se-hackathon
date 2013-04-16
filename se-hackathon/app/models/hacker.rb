@@ -1,4 +1,7 @@
 class Hacker < ActiveRecord::Base
+  has_many :claims
+  has_many :tasks, :through => :claims
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -8,7 +11,7 @@ class Hacker < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :name, :email, :password, :password_confirmation,
-                  :remember_me, :provider, :uid
+                  :remember_me, :provider, :uid, :as => [:default, :admin]
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :hackathons
@@ -24,6 +27,15 @@ class Hacker < ActiveRecord::Base
                              password: Devise.friendly_token[0,20])
     end
     hacker
+  end
+
+  def claim(task)
+    if task.claimable?
+      tasks << task
+      return true
+    else
+      return false
+    end
   end
 
 end

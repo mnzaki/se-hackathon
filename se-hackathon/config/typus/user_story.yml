@@ -2,7 +2,7 @@
 
 UserStory:
   fields:
-    default: to_label
-    form: 
+    default: number, description
+    form: number, description
   relationships: tasks
   application: Application

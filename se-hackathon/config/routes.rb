@@ -1,7 +1,6 @@
 SeHackathon::Application.routes.draw do
   resources :tasks
 
-
   resources :categories
 
   resources :user_stories

@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Task:
+  fields:
+    default: name, description, points, minimum_global_level, time_limit, category, user_story
+    form: name, description, points, minimum_global_level, time_limit, category, user_story
+  relationships: 
+  application: Application
