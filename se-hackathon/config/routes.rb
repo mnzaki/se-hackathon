@@ -1,7 +1,9 @@
 SeHackathon::Application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    post 'claim', action: 'claim', on: :member
+  end
 
-  resources :categories
+  #resources :categories
 
   resources :user_stories
 
