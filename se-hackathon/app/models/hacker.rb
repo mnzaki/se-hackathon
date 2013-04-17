@@ -1,8 +1,6 @@
 class Hacker < ActiveRecord::Base
   has_many :claims
   has_many :claimed_tasks, :through => :claims, :source => :task
-  has_many :finishes
-  has_many :finished_tasks, :through => :finishes, :source => :task
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
