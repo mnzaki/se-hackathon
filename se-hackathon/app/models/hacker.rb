@@ -1,6 +1,8 @@
 class Hacker < ActiveRecord::Base
   has_many :claims
-  has_many :tasks, :through => :claims
+  has_many :claimed_tasks, :through => :claims, :source => :task
+  has_many :finishes
+  has_many :finished_tasks, :through => :finishes, :source => :task
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -31,8 +33,11 @@ class Hacker < ActiveRecord::Base
 
   def claim(task)
     if task.claimable?
-      tasks << task
-      return true
+      c = Claim.new
+      c.task = task
+      c.hacker = self
+      c.claimed_at = Time.now
+      c.save
     else
       return false
     end
