@@ -22,14 +22,15 @@
 
 <p>
   <b>Time limit:</b>
-  <%= @task.time_limit %>
+  <%= @task.time_limit %> mins
 </p>
 
 <p>
   <b>Category:</b>
-  <%= @task.Category %>
+  <%= @task.category.name %>
 </p>
 
+<%= render 'instructions', :locals => {task: @task, hacker: @hacker} %>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
+
 <%= link_to 'Back', tasks_path %>
