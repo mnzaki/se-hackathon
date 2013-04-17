@@ -30,4 +30,8 @@ class Task < ActiveRecord::Base
       prerequisites.reduce(true) {|acc, cur| cur.unlocked? && acc}
   end
 
+  def claimed?
+    hackers.present?
+  end
+
 end

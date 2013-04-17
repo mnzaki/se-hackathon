@@ -41,6 +41,10 @@ class Hacker < ActiveRecord::Base
     end
   end
 
+  def claimed?(task)
+    return claimed_tasks.include?(task)
+  end
+
   def finish(task)
     return false if task.done
     task.done = true
