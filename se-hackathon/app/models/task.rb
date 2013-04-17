@@ -17,12 +17,14 @@ class Task < ActiveRecord::Base
     if claims = []
       return true
     else
-      claims.last.claimed_at < time_limit.minutes.ago
+      #FIXME is using claims.last safe?
+      claims.last.claimed_at > time_limit.minutes.ago && unlocked?
     end
   end
 
   def unlocked?
-
+    minimum_global_level >= Hackathon.active.level &&
+      prerequisites.reduce(true) {|acc, cur| cur.unlocked? && acc}
   end
 
 end
