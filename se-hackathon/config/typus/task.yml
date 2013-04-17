@@ -3,6 +3,6 @@
 Task:
   fields:
     default: name, description, points, minimum_global_level, time_limit, category, user_story
-    form: name, description, points, minimum_global_level, time_limit, category, user_story
+    form: name, description, points, minimum_global_level, time_limit, category, user_story, prequisites
   relationships: 
   application: Application
