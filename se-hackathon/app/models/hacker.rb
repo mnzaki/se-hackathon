@@ -41,4 +41,12 @@ class Hacker < ActiveRecord::Base
     end
   end
 
+  def finish(task)
+    return false if task.done
+    task.done = true
+    task.finisher = self
+    task.finished_at = Time.now
+    task.save
+  end
+
 end
