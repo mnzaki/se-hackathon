@@ -14,8 +14,8 @@ class Task < ActiveRecord::Base
 
 
   def claimable?
-    if claims = []
-      return true
+    if claims.empty?
+      true
     else
       #FIXME is using claims.last safe?
       claims.last.claimed_at > time_limit.minutes.ago && unlocked?
@@ -23,7 +23,8 @@ class Task < ActiveRecord::Base
   end
 
   def unlocked?
-    minimum_global_level >= Hackathon.active.level &&
+    user_story.hackathon.active? &&
+      minimum_global_level >= user_story.hackathon.level &&
       prerequisites.reduce(true) {|acc, cur| cur.unlocked? && acc}
   end
 
