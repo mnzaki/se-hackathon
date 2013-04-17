@@ -8,7 +8,7 @@ class Task < ActiveRecord::Base
                           :join_table => "prequisites_tasks",
                           :association_foreign_key => "prequisite_id"
 
-  attr_accessible :description, :minimum_global_level, :name, :points,
+  attr_accessible :number, :description, :minimum_global_level, :name, :points,
                   :time_limit, :category_id, :user_story_id,
                   :as => [:default, :admin]
 
