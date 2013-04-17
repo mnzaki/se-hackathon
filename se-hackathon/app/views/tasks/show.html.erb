@@ -16,11 +16,6 @@
 </p>
 
 <p>
-  <b>Minimum global level:</b>
-  <%= @task.minimum_global_level %>
-</p>
-
-<p>
   <b>Time limit:</b>
   <%= @task.time_limit %> mins
 </p>
@@ -31,6 +26,6 @@
 </p>
 
 <%= render 'instructions', :locals => {task: @task, hacker: @hacker} %>
-
+<%= link_to 'Claim', claim_task_path(@task.id), :class => :button %>
 
 <%= link_to 'Back', tasks_path %>
