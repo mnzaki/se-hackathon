@@ -9,16 +9,16 @@ class Task < ActiveRecord::Base
                           :association_foreign_key => "prequisite_id"
 
   attr_accessible :description, :minimum_global_level, :name, :points,
-                  :time_limit, :category_id, :user_story_id,
+                  :time_limit, :category_id, :user_story_id, :done,
                   :as => [:default, :admin]
 
 
   def claimable?
-    if claims = []
-      return true
-    else
-      claims.last.claimed_at < time_limit.minutes.ago
-    end
+    return false if done
+
+    return true if claims == []
+
+    return claims.last.claimed_at < time_limit.minutes.ago
   end
 
   def unlocked?
