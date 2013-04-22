@@ -1,8 +1,9 @@
 class Hackathon < ActiveRecord::Base
-  attr_accessible :active, :description, :name, :time, :level
+  attr_accessible :active, :description, :name, :repo, :time, :level
 
   has_and_belongs_to_many :hackers
   has_many :user_stories
+  belongs_to :supervisor, class_name: 'Hacker'
 
   HACKATHONS_ROOT = "#{::Rails.root}/hackathons"
 
@@ -15,10 +16,6 @@ class Hackathon < ActiveRecord::Base
 
   def storage_path
     "#{HACKATHONS_ROOT}/#{id}"
-  end
-
-  def git
-    @git ||= Rugged::Repository.new("#{storage_path}/repo")
   end
 
   def tests_path
