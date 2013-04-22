@@ -11,19 +11,26 @@ class Hacker < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :name, :email, :password, :password_confirmation,
-                  :remember_me, :provider, :uid, :as => [:default, :admin]
-  # attr_accessible :title, :body
+                  :remember_me, :provider, :uid, :github_token,
+                  :as => [:default, :admin]
 
   has_and_belongs_to_many :hackathons
 
   def self.find_or_create_for_github_oauth(auth, signed_in_resource = nil)
     hacker = Hacker.where(:provider => auth.provider, :uid => auth.uid).first
-    unless hacker
+
+    if hacker
+      # FIXME does the token actually expire?
+      # FIXME set this and let it be committed to DB with the rest of the devise
+      #       fields
+      hacker.update_attributes(github_token: auth.credentials.token)
+    else
       hacker = Hacker.create(name: auth.info.name,
                              username: auth.info.nickname,
+                             email: auth.info.email,
                              provider: auth.provider,
                              uid: auth.uid,
-                             email: auth.info.email,
+                             github_token: auth.credentials.token,
                              password: Devise.friendly_token[0,20])
     end
     hacker
@@ -36,6 +43,10 @@ class Hacker < ActiveRecord::Base
     else
       return false
     end
+  end
+
+  def github
+    @github ||= Github.new oauth_token: github_token
   end
 
 end
