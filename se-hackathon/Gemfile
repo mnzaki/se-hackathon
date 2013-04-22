@@ -24,6 +24,8 @@ gem 'github_api', '0.9.7'
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'bootstrap-sass', '~> 2.3.1.0'
 end
 
 # Gems used for testing and development

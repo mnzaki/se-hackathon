@@ -1,4 +1,18 @@
 class TasksController < ApplicationController
+
+  before_filter :check_logged_in
+  before_filter :set_hacker
+
+  def set_hacker
+    @hacker = current_hacker
+    unless @hacker
+      @hacker = Hacker.all.second
+    end
+  end
+
+  def check_logged_in
+  end
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -8,6 +22,14 @@ class TasksController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @tasks }
     end
+  end
+
+  def claim
+    task = Task.find(params[:id])
+    if (@hacker.claim(task))
+      flash[:notice] = "You have claimed the task"
+    end
+    redirect_to task_path(task), flash: flash
   end
 
   # GET /tasks/1
@@ -21,6 +43,7 @@ class TasksController < ApplicationController
     end
   end
 
+=begin
   # GET /tasks/new
   # GET /tasks/new.json
   def new
@@ -80,4 +103,5 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end

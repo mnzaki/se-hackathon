@@ -1,9 +1,30 @@
 <p id="notice"><%= notice %></p>
+<%= link_to 'Back', tasks_path %>
+<div class="well">
+  <b><%= @task.name %></b>
+  <div class="pull-right">
+    <% if (@task.claimable?) %>
+      <%= button_to 'Claim this task',
+        claim_task_path(@task.id), :class => "btn btn-success" %>
+    <% else %>
+      <div class="btn disabled">Claimed</div>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @task.name %>
-</p>
+<% if @task.claimed? %>
+  <% if @hacker.claimed?(@task) %>
+    <div class="alert alert-success">
+      You have claimed this task
+    </div>
+  <% else %>
+    <div class="alert alert-error">
+      <%= @task.hackers.last.name %> has claimed this task at
+      <%= @task.claims.last.claimed_at %> and can be claimed again at
+      <%= @task.claims.last.claimed_at + 1.hour %>
+    </div>
+  <% end %>
+<% end %>
 
 <p>
   <b>Description:</b>
@@ -16,20 +37,14 @@
 </p>
 
 <p>
-  <b>Minimum global level:</b>
-  <%= @task.minimum_global_level %>
-</p>
-
-<p>
   <b>Time limit:</b>
-  <%= @task.time_limit %>
+  <%= @task.time_limit %> mins
 </p>
 
 <p>
   <b>Category:</b>
-  <%= @task.Category %>
+  <%= @task.category.name %>
 </p>
 
+<%= render 'instructions', :locals => {task: @task, hacker: @hacker} %>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>

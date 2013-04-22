@@ -1,33 +1,21 @@
-<h1>Listing tasks</h1>
-
-<table>
+<h1>Here are the tasks for this Hackathon</h1>
+<p>You can click on a task to view the description and claim it</p>
+<table class="table table-striped">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Task</th>
     <th>Points</th>
-    <th>Minimum global level</th>
-    <th>Time limit</th>
     <th>Category</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Time limit</th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= task.name %></td>
-    <td><%= task.description %></td>
+    <td><%= link_to task.name, task_path(task) %></td>
     <td><%= task.points %></td>
-    <td><%= task.minimum_global_level %></td>
-    <td><%= task.time_limit %></td>
-    <td><%= task.Category %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= task.category.name %></td>
+    <td><%= task.time_limit %> mins</td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Task', new_task_path %>

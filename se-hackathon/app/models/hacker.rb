@@ -1,6 +1,6 @@
 class Hacker < ActiveRecord::Base
   has_many :claims
-  has_many :tasks, :through => :claims
+  has_many :claimed_tasks, :through => :claims, :source => :task
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -36,17 +36,32 @@ class Hacker < ActiveRecord::Base
     hacker
   end
 
+  def github
+    @github ||= Github.new oauth_token: github_token
+  end
+
   def claim(task)
     if task.claimable?
-      tasks << task
-      return true
+      c = Claim.new
+      c.task = task
+      c.hacker = self
+      c.claimed_at = Time.now
+      c.save
     else
       return false
     end
   end
 
-  def github
-    @github ||= Github.new oauth_token: github_token
+  def claimed?(task)
+    return claimed_tasks.include?(task)
+  end
+
+  def finish(task)
+    return false if task.done
+    task.done = true
+    task.finisher = self
+    task.finished_at = Time.now
+    task.save
   end
 
 end
